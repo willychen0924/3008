@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>3008 大立光｜匯聚帶 v2 (2026/04/23)</title>
+<style>
+:root{
+  --bg:#f0ebe0;
+  --surface:#fff;
+  --ink:#111a28;
+  --ink-2:#3b4a5e;
+  --ink-3:#7a8694;
+  --ink-4:#a5afb9;
+  --rule:#d6cdb5;
+  --line:#e8e0cc;
+  --line-soft:#f0ead8;
+
+  --now:#c07c10;
+  --now-bg:#fff6d6;
+
+  --c1:#c6395e; --c1b:#fdedf0; --c1w:#fdf5f7;
+  --c2:#2978c4; --c2b:#e4f0fb; --c2w:#f1f7fd;
+  --c3:#b96a15; --c3b:#fbeedc; --c3w:#fdf7ec;
+  --c4:#9e7a12; --c4b:#f9efc5; --c4w:#fcf7df;
+  --c5:#1d7a48; --c5b:#daf1e2; --c5w:#eaf5ee;
+  --c6:#0e7878; --c6b:#d2ecec; --c6w:#e6f3f3;
+  --c7:#6a3b8a; --c7b:#ebdef3; --c7w:#f2e8f7;
+  --c8:#8b4513; --c8b:#f5e6d3; --c8w:#faf2eb;
+
+  --shadow:0 1px 3px rgba(17,26,40,.06),0 6px 20px rgba(17,26,40,.05);
+  --r:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  margin:0;padding:20px 16px 50px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+  background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;
+}
+.w{max-width:980px;margin:0 auto}
+.m{font-variant-numeric:tabular-nums}
+
+.hd{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;position:relative}
+.hd::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--c1) 0%,var(--c1) 12%,var(--c2) 12%,var(--c2) 24%,var(--c3) 24%,var(--c3) 36%,var(--c4) 36%,var(--c4) 48%,var(--c5) 48%,var(--c5) 60%,var(--c6) 60%,var(--c6) 72%,var(--c7) 72%,var(--c7) 85%,var(--c8) 85%)}
+.hd-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0;gap:20px;flex-wrap:wrap}
+.hd-id{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hd-id h1{margin:0;font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.hd-id h1 .code{color:var(--ink-2);margin-right:4px}
+.hd-id .pipe{color:var(--rule);font-weight:300;font-size:32px;margin:0 2px}
+.hd-id h2{margin:0;font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.hd-price{text-align:right;display:flex;align-items:baseline;gap:14px}
+.hd-price .p{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.hd-price .chg{font-size:12px;color:var(--c1);font-weight:700}
+.hd-price .chg span{color:var(--ink-3);font-weight:500;margin-left:4px}
+.hd-price .chg.up{color:var(--c5)}
+
+.hd-stats{display:flex;gap:0;margin:14px 24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.hd-stats>div{flex:1;padding:8px 16px;border-right:1px dashed var(--line)}
+.hd-stats>div:first-child{padding-left:0}
+.hd-stats>div:last-child{border-right:none;padding-right:0}
+.hd-stats dt{font-size:10px;font-weight:700;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1px}
+.hd-stats dd{margin:0;font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+
+.kpis{display:flex;gap:8px;flex-wrap:wrap;padding:12px 24px 14px}
+.kp{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--surface)}
+.kp .dot{width:8px;height:8px;border-radius:3px;flex-shrink:0}
+.kp .v{font-weight:800;color:var(--ink);font-size:14px;letter-spacing:-.01em}
+.kp .n{color:var(--ink-3);font-size:11px;font-weight:600}
+
+.upd,.scoring{background:var(--surface);border-radius:var(--r);box-shadow:0 1px 2px rgba(0,0,0,.04);margin-bottom:12px;border:1px solid var(--line);overflow:hidden}
+.upd-toggle,.scoring-toggle{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;-webkit-user-select:none;user-select:none;background:transparent;border:none;width:100%;font:inherit;color:var(--ink);text-align:left}
+.upd-toggle:hover,.scoring-toggle:hover{background:#faf7ee}
+.upd-toggle h3,.scoring-toggle h3{margin:0;font-size:13px;font-weight:800;flex:1;display:flex;align-items:center;gap:8px}
+.upd-toggle h3::before{content:"4/23";font-size:10px;font-weight:800;color:#fff;background:var(--c5);padding:2px 8px;border-radius:4px;letter-spacing:.04em}
+.upd-toggle .arr,.scoring-toggle .arr{font-size:14px;color:var(--ink-3);transition:transform .25s}
+.upd.open .upd-toggle .arr,.scoring.open .scoring-toggle .arr{transform:rotate(180deg)}
+.upd-body,.scoring-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.upd.open .upd-body{max-height:1200px}
+.scoring.open .scoring-body{max-height:600px}
+.upd-list{padding:0 20px 14px;margin:0;list-style:none;columns:2;column-gap:24px}
+.upd-list li{break-inside:avoid;font-size:13px;color:var(--ink-2);line-height:1.55;padding:3px 0 3px 18px;position:relative}
+.upd-list li::before{content:"";position:absolute;left:4px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--c5);opacity:.5}
+.hl{font-weight:800;color:var(--ink);background:linear-gradient(180deg,transparent 60%,#ffe89b 60%);padding:0 2px}
+.hl-up{font-weight:800;color:var(--c5);background:linear-gradient(180deg,transparent 60%,#daf1e2 60%);padding:0 2px}
+.hl-dn{font-weight:800;color:var(--c1);background:linear-gradient(180deg,transparent 60%,#fdedf0 60%);padding:0 2px}
+
+.scoring-inner{padding:0 20px 14px;font-size:12.5px;color:var(--ink-2);line-height:1.7}
+.scoring-inner table{width:100%;border-collapse:collapse;margin-top:6px}
+.scoring-inner th{text-align:left;font-size:10px;font-weight:800;color:var(--ink-3);letter-spacing:.06em;padding:4px 8px;border-bottom:1px solid var(--line)}
+.scoring-inner td{padding:4px 8px;font-size:12px;color:var(--ink-2);border-bottom:1px solid var(--line-soft)}
+.scoring-inner td:first-child{font-weight:700;color:var(--ink)}
+
+.zones{display:flex;flex-direction:column;gap:0}
+.zone{--zc:var(--ink);--zb:#f5f5f5;--zw:#fafafa;background:var(--surface);border:1px solid var(--line);border-bottom:none;display:grid;grid-template-columns:220px 1fr;min-height:0;position:relative;transition:box-shadow .2s}
+.zone:first-child{border-radius:var(--r) var(--r) 0 0}
+.zone:last-child{border-bottom:1px solid var(--line);border-radius:0 0 var(--r) var(--r)}
+.zone::before{content:"";position:absolute;top:0;bottom:0;left:0;width:4px;background:var(--zc);z-index:2}
+.zone:first-child::before{border-radius:var(--r) 0 0 0}
+.zone:last-child::before{border-radius:0 0 0 var(--r)}
+.zone:hover{box-shadow:0 2px 12px rgba(17,26,40,.08);z-index:2}
+
+.zone[data-c="1"]{--zc:var(--c1);--zb:var(--c1b);--zw:var(--c1w)}
+.zone[data-c="2"]{--zc:var(--c2);--zb:var(--c2b);--zw:var(--c2w)}
+.zone[data-c="3"]{--zc:var(--c3);--zb:var(--c3b);--zw:var(--c3w)}
+.zone[data-c="4"]{--zc:var(--c4);--zb:var(--c4b);--zw:var(--c4w)}
+.zone[data-c="5"]{--zc:var(--c5);--zb:var(--c5b);--zw:var(--c5w)}
+.zone[data-c="6"]{--zc:var(--c6);--zb:var(--c6b);--zw:var(--c6w)}
+.zone[data-c="7"]{--zc:var(--c7);--zb:var(--c7b);--zw:var(--c7w)}
+.zone[data-c="8"]{--zc:var(--c8);--zb:var(--c8b);--zw:var(--c8w)}
+
+.z-left{padding:14px 16px;background:var(--zw);border-right:1px solid var(--line-soft);display:flex;flex-direction:column;gap:5px}
+.z-left .price{font-size:26px;font-weight:800;color:var(--zc);letter-spacing:-.02em;line-height:1.05}
+.z-left .name{font-size:14px;font-weight:800;color:var(--ink);line-height:1.25}
+.z-left .meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:800;background:var(--zb);color:var(--zc);border:1px solid color-mix(in srgb,var(--zc) 25%,transparent);white-space:nowrap}
+.badge::before{content:"●";font-size:7px;vertical-align:1px}
+.dist{font-size:11.5px;color:var(--ink-3);font-weight:600}
+.dist b{color:var(--ink-2);font-weight:700}
+
+.stars{font-size:13px;letter-spacing:1px;line-height:1;margin:1px 0}
+.stars .on{color:var(--zc)}
+.stars .off{color:var(--line)}
+.vol-bar{display:flex;align-items:center;gap:8px;margin-top:1px}
+.vol-track{flex:1;height:5px;background:var(--line);border-radius:3px;overflow:hidden;max-width:110px}
+.vol-fill{height:100%;border-radius:3px;background:var(--zc);opacity:.55}
+.vol-label{font-size:10px;color:var(--ink-3);font-weight:700;white-space:nowrap}
+
+.z-right{padding:12px 18px;display:flex;flex-direction:column;gap:8px}
+.z-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.z-cols h4{margin:0 0 4px;font-size:10px;font-weight:800;color:var(--zc);letter-spacing:.1em;text-transform:uppercase}
+.z-cols ul{margin:0;padding:0;list-style:none}
+.z-cols li{font-size:12.5px;color:var(--ink-2);line-height:1.5;padding:2px 0 2px 12px;position:relative}
+.z-cols li::before{content:"";position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--ink-4)}
+.z-cols li b,.z-cols li strong{color:var(--ink);font-weight:800}
+
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:5px;background:var(--zw);border:1px solid color-mix(in srgb,var(--zc) 20%,transparent);font-size:11px;color:var(--ink-2);font-weight:600}
+.chip em{font-style:normal;font-size:9px;font-weight:800;color:var(--zc);letter-spacing:.03em}
+.chip b{color:var(--ink);font-weight:800}
+
+.verdict{padding:7px 12px;background:var(--zw);border-left:2px solid var(--zc);border-radius:0 4px 4px 0;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.verdict::before{content:"判讀 ";font-size:9px;font-weight:800;color:var(--zc);letter-spacing:.1em;margin-right:4px}
+.verdict b,.verdict strong{color:var(--ink);font-weight:800}
+
+.gap{background:#f4efe3;border:1px solid var(--line);border-bottom:none;padding:8px 18px 8px 24px;display:grid;grid-template-columns:220px 1fr;gap:0;font-size:12px;color:var(--ink-3);position:relative}
+.gap::before{content:"";position:absolute;top:0;bottom:0;left:0;width:4px;background:repeating-linear-gradient(180deg,var(--rule) 0,var(--rule) 4px,transparent 4px,transparent 8px)}
+.gap .g-range{font-weight:800;color:var(--ink-2);font-size:13px;padding-right:16px;display:flex;align-items:center}
+.gap .g-desc{padding:0 0 0 18px;border-left:1px dashed var(--rule);line-height:1.5}
+.gap .g-desc strong{color:var(--ink-2);font-weight:700}
+
+.now-row{background:linear-gradient(90deg,#e08b18,#d4790a);border:none;padding:9px 24px;display:flex;align-items:center;gap:14px;font-size:12px;color:#fff;font-weight:800;position:relative;z-index:3;box-shadow:0 2px 8px rgba(212,121,10,.3)}
+.now-row .arrow{font-size:16px;color:#fff}
+.now-row .label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.now-row .val{font-size:22px;letter-spacing:-.02em;color:#fff}
+.now-row .note{font-size:11px;color:rgba(255,255,255,.7);font-weight:600;margin-left:auto}
+
+.bookshort{background:var(--surface);border-radius:var(--r);margin-bottom:12px;border:1px solid var(--line);padding:14px 20px}
+.bookshort h3{margin:0 0 10px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px}
+.bookshort h3::before{content:"籌碼";font-size:10px;font-weight:800;color:#fff;background:var(--c1);padding:2px 8px;border-radius:4px;letter-spacing:.04em}
+.bs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bs-cell{border-left:3px solid var(--c1);padding:6px 0 6px 12px}
+.bs-cell dt{font-size:10px;font-weight:700;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin:0 0 2px}
+.bs-cell dd{margin:0;font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.bs-cell .sub{font-size:11px;font-weight:600;color:var(--ink-3);margin-top:1px}
+.bs-cell.up{border-left-color:var(--c5)}
+.bs-cell.up dd{color:var(--c5)}
+.bs-cell.down{border-left-color:var(--c1)}
+.bs-cell.down dd{color:var(--c1)}
+.bs-note{margin-top:10px;padding:10px 12px;background:var(--line-soft);border-radius:6px;font-size:12px;color:var(--ink-2);line-height:1.55}
+.bs-note b{color:var(--ink);font-weight:800}
+
+.ft{margin-top:14px;padding:12px 20px;background:var(--line-soft);border-radius:var(--r);font-size:11px;color:var(--ink-3);text-align:center;line-height:1.6}
+.ft b{color:var(--ink-2)}
+
+@media(max-width:760px){
+  .hd-top{flex-direction:column;gap:8px;align-items:flex-start}
+  .hd-price{text-align:left}
+  .hd-id h1,.hd-id h2{font-size:28px}
+  .hd-id .pipe{font-size:24px}
+  .hd-price .p{font-size:34px}
+  .hd-stats{flex-wrap:wrap}
+  .hd-stats>div{flex:none;width:50%;padding:8px 12px}
+  .hd-stats>div:nth-child(2),.hd-stats>div:nth-child(4){border-right:none}
+  .hd-stats>div:nth-child(3),.hd-stats>div:nth-child(4){padding-left:0}
+  .kpis{gap:6px}
+  .kp{padding:5px 10px;font-size:12px}
+  .kp .v{font-size:13px}
+  .upd-list{columns:1}
+  .zone{grid-template-columns:1fr}
+  .z-left{border-right:none;border-bottom:1px solid var(--line-soft);flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px}
+  .z-left .price{font-size:22px}
+  .z-left .name{font-size:13px}
+  .z-right{padding:12px 16px}
+  .z-cols{grid-template-columns:1fr}
+  .gap{grid-template-columns:1fr;gap:4px}
+  .gap .g-desc{border-left:none;padding-left:0}
+  .bs-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  body{padding:14px 8px 30px}
+  .hd-id h1,.hd-id h2{font-size:22px}
+  .hd-id .pipe{font-size:18px}
+  .hd-price .p{font-size:28px}
+  .z-left .price{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="w">
+
+<header class="hd">
+  <div class="hd-top">
+    <div class="hd-id">
+      <h1 class="m"><span class="code">3008</span> 大立光</h1>
+      <span class="pipe">|</span>
+      <h2>匯聚帶 v2</h2>
+    </div>
+    <div class="hd-price m">
+      <span class="p">2,485</span>
+      <span class="chg up">↑ 16.4%<span>自 4/2 低 2,135</span></span>
+    </div>
+  </div>
+  <dl class="hd-stats m">
+    <div><dt>基準日</dt><dd>2026/04/23</dd></div>
+    <div><dt>盤中低</dt><dd>2,440</dd></div>
+    <div><dt>波段低</dt><dd>2,135</dd></div>
+    <div><dt>反彈高</dt><dd>2,930</dd></div>
+    <div><dt>大B頂</dt><dd>3,230</dd></div>
+  </dl>
+  <div class="kpis m">
+    <div class="kp"><span class="dot" style="background:var(--c8)"></span><span class="v">3,150–3,230</span><span class="n">★★★★★ 大B壓力</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c7)"></span><span class="v">2,900–2,960</span><span class="n">★★★ 反彈頂</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c6)"></span><span class="v">2,800–2,850</span><span class="n">★★★★ 雙頂壓力</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c5)"></span><span class="v">2,660–2,720</span><span class="n">★★★★ 關鍵壓力</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c4)"></span><span class="v">2,530–2,610</span><span class="n">★★★ 第一壓力</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c3)"></span><span class="v">2,420–2,495</span><span class="n">★★★★★ 測試中</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c2)"></span><span class="v">2,300–2,395</span><span class="n">★★★★★ 主支撐</span></div>
+    <div class="kp"><span class="dot" style="background:var(--c1)"></span><span class="v">2,100–2,170</span><span class="n">★★★★ 波段主底</span></div>
+  </div>
+</header>
+
+<!-- UPDATE -->
+<section class="upd open" id="upd">
+  <button class="upd-toggle" onclick="this.closest('.upd').classList.toggle('open')">
+    <h3>分析重點（與 3/31 舊報告對比的結構性轉變）</h3>
+    <span class="arr">▾</span>
+  </button>
+  <div class="upd-body">
+    <ul class="upd-list">
+      <li><b>原預測 1,900–1,950 未實現</b>：股價在 <span class="hl-up">2,135（4/2）就止跌</span>，比預期匯聚帶上緣還高 185 點，底部比想像中更早、更高出現。</li>
+      <li><b>V 型反轉</b>：2,135 → <span class="hl-up">2,930（4/15）9 日 +37.2%</span>，伴隨 4/14–4/17 連續 4 天爆量（3,000–4,300 張，均量 4 倍）。</li>
+      <li><b>借券賣出創歷史新高後急速回補</b>：4/8 觸頂 <span class="hl">7,925 張（歷史 98.8 百分位，24 個月成長 13 倍）</span>，4/22 已回到 6,669 張（8 天回補 1,256 張，-15.9%），<span class="hl-up">空頭擁擠結構在瓦解</span>。</li>
+      <li><b>外資連續大買</b>：4/7–4/22 累計買超 <span class="hl-up">+3,342 張</span>，外資持股 <span class="hl-up">28.6% → 31.3%</span>（+2.7%），為 2025 以來最顯著的持股變動。</li>
+      <li><b>多方跳空缺口未補</b>：4/13→4/14 留 <span class="hl">2,485–2,540</span>，4/14→4/15 留 <span class="hl">2,670–2,750</span>。現價 2,485 剛站在第一缺口下緣，守住代表反彈結構未破。</li>
+      <li><b>空方缺口於 4/17 出現</b>：4/16→4/17 留 <span class="hl-dn">2,690–2,750</span>（回補式下跌），屬向下逃逸缺口，反彈時將遇到壓力。</li>
+      <li><b>均線結構已翻多</b>：現價 2,485 站上 MA20(2,406) / MA60(2,387) / MA120(2,315) / MA240(2,318)，四條均線已近糾結位置，短線糾結後發散機率高。</li>
+      <li><b>MA240 年線扣抵轉上彎</b>：未來 60 天扣抵值 2,100–2,365 全部低於現價 → <span class="hl-up">年線持續上彎已是數學必然</span>，長期趨勢由空轉多。</li>
+      <li><b>底背離確認</b>：相較 2025/12/16 低 2,025（RSI14=6.8），4/2 低 2,140（RSI14=34.1），價更高而指標大幅改善，<span class="hl-up">底背離明確成立</span>。</li>
+      <li><b>目前 4/23 拉回精確觸及 Fib 0.618</b>：盤中低 2,440 = 2,135→2,930 反彈段的 0.618 回撤（2,439），為反彈段第一道支撐，若守穩為健康回測。</li>
+      <li><b>量能遞減拉回</b>：從 4/15 爆量 4,245 張見高後，4/21/22 拉回日量僅 1,770/1,718 張，<span class="hl-up">量縮拉回</span>屬多頭整理特徵。</li>
+      <li><b>基本面催化在即</b>：2026/4 底前法說會，2026E EPS 共識 189 元，現價對應 PE 13.1x、PB 1.75x，仍在歷史偏低區間。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 籌碼快覽 -->
+<section class="bookshort">
+  <h3>籌碼快覽 · 近 15 交易日</h3>
+  <div class="bs-grid m">
+    <div class="bs-cell up">
+      <dt>外資買賣超</dt>
+      <dd>+3,342 張</dd>
+      <div class="sub">持股 28.6% → 31.3%</div>
+    </div>
+    <div class="bs-cell down">
+      <dt>投信買賣超</dt>
+      <dd>−1,256 張</dd>
+      <div class="sub">連續調節高點</div>
+    </div>
+    <div class="bs-cell up">
+      <dt>借券餘額變動</dt>
+      <dd>−1,256 張</dd>
+      <div class="sub">7,925 → 6,669</div>
+    </div>
+    <div class="bs-cell">
+      <dt>融券餘額</dt>
+      <dd>7 張</dd>
+      <div class="sub">近乎歸零，無短空</div>
+    </div>
+  </div>
+  <div class="bs-note">
+    <b>結論：</b>外資連續大買 + 借券快速回補 + 投信在高點調節 = 典型的「外資主導 + 軋空結構鬆動」行情。借券餘額絕對水位仍極高（6,669 張，近 3 年 92.7 百分位），<b>若持續回補，每日供應短期向上動能</b>；若突然停滯或反彈受阻，則需提防空頭重新建倉。
+  </div>
+</section>
+
+<!-- SCORING LEGEND -->
+<section class="scoring" id="scoring">
+  <button class="scoring-toggle" onclick="this.closest('.scoring').classList.toggle('open')">
+    <h3>星級評定方法</h3>
+    <span class="arr">▾</span>
+  </button>
+  <div class="scoring-body">
+    <div class="scoring-inner">
+      <table>
+        <tr><th>星級</th><th>條件</th><th>範例</th></tr>
+        <tr><td>★★★★★</td><td>5＋ 獨立方法匯聚（Fib × 量能 × 趨勢線 × 缺口 × 均線），且具歷史極端特徵</td><td>2,420–2,495、2,300–2,395、3,150–3,230</td></tr>
+        <tr><td>★★★★</td><td>4＋ 方法匯聚，量能或趨勢線其一較弱</td><td>2,660–2,720、2,800–2,850、2,100–2,170</td></tr>
+        <tr><td>★★★</td><td>3＋ 方法，區間偏寬或與其他帶重疊</td><td>2,530–2,610、2,900–2,960</td></tr>
+        <tr><td>★★</td><td>2–3 方法 ＋ 中量，已失守轉壓力或極端情境</td><td>1,950–2,050</td></tr>
+        <tr><td>★</td><td>多方法但極端低機率情境</td><td>1,850–1,910</td></tr>
+      </table>
+      <p style="margin:8px 0 0;font-size:11px;color:var(--ink-3)">
+        技術方法：Fibonacci 回撤（原始 + 還原、線性 + 對數）、N 波等幅 / 倍幅、上升趨勢線（2022→2025→2026 三點）、歷史價量密集帶、缺口位置、均線糾結位置。<br>
+        量能條：以 2,300–2,395 主支撐帶（近 10 年觸及法 214,081 張）為 100% 基準，其他帶區按比例。<br>
+        基本面：2026E EPS 共識 189 元（凱基/高盛 189.35，亞系外資目標價 3,700–3,800），2025Q3 每股淨值 1,422 元。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ ZONE LIST ═════ -->
+<div class="zones">
+
+  <!-- ⑧ 3,150–3,230 ★★★★★ 大B頂 -->
+  <div class="zone" data-c="8">
+    <div class="z-left">
+      <div class="price m">3,150 – 3,230</div>
+      <div class="name">大 B 浪頂壓力</div>
+      <div class="stars"><span class="on">★★★★★</span></div>
+      <div class="meta">
+        <span class="badge">最終目標</span>
+        <span class="dist m">距現價 <b>+26.8% ~ +30.0%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:49%"></div></div>
+        <span class="vol-label">104K 中</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（4 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>2024/8/30 絕對高</em><b>3,230</b></span>
+            <span class="chip"><em>W5=2.618×下跌</em><b>3,169</b></span>
+            <span class="chip"><em>1浪擴展2.618</em><b>3,169</b></span>
+            <span class="chip"><em>券商目標均值</em><b>3,250–3,800</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>說明</h4>
+          <ul>
+            <li>若 2,135 為大 W5 真底，則新上漲浪的主目標在此</li>
+            <li>凱基 3,250 / 高盛 3,549 / 亞系外資 3,700~3,800</li>
+            <li>對應 PE 17.2x（仍在歷史合理區間上緣）</li>
+            <li>需突破 2,930 才能打開此目標</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">若新一輪上漲啟動，<b>此帶為 2026–2027 年主目標區</b>。當前距現價 +27–30%，屬中長線目標，非短線操作參考。</div>
+    </div>
+  </div>
+
+  <!-- ⑦ 2,900–2,960 ★★★ 反彈頂 -->
+  <div class="zone" data-c="7">
+    <div class="z-left">
+      <div class="price m">2,900 – 2,960</div>
+      <div class="name">本波反彈高 / 前波頸線</div>
+      <div class="stars"><span class="on">★★★</span><span class="off">☆☆</span></div>
+      <div class="meta">
+        <span class="badge">關鍵突破</span>
+        <span class="dist m">距現價 <b>+16.7% ~ +19.1%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:56%"></div></div>
+        <span class="vol-label">120K 中</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（3 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>4/15 絕對高</em><b>2,930</b></span>
+            <span class="chip"><em>1浪擴展2.0</em><b>2,925</b></span>
+            <span class="chip"><em>大波段 Fib 0.786</em><b>2,922</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>說明</h4>
+          <ul>
+            <li>4/15 盤中反彈最高 <b>2,930</b> 為本波強壓</li>
+            <li>帶量突破代表反彈結構由 ABC 修正轉為新 1–2–3 上漲</li>
+            <li>突破後指向 3,150–3,230 大B頂</li>
+            <li>若遇壓拉回 → 驗證是 B 浪反彈而非真正反轉</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">這是<b>分辨「反彈」與「反轉」的臨界點</b>。站穩上去 → 主劇本（2,135 真底）確立；帶量反壓下跌 → 次劇本（仍有 C 浪）啟動。</div>
+    </div>
+  </div>
+
+  <!-- ⑥ 2,800–2,850 ★★★★ 雙頂 -->
+  <div class="zone" data-c="6">
+    <div class="z-left">
+      <div class="price m">2,800 – 2,850</div>
+      <div class="name">雙頂壓力 + 量能密集</div>
+      <div class="stars"><span class="on">★★★★</span><span class="off">☆</span></div>
+      <div class="meta">
+        <span class="badge">強壓</span>
+        <span class="dist m">距現價 <b>+12.7% ~ +14.7%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:65%"></div></div>
+        <span class="vol-label">140K 厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（5 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>4/15+4/16 雙頂收盤</em><b>2,820</b></span>
+            <span class="chip"><em>Fib 0.236(2,135→2,930)</em><b>2,742</b></span>
+            <span class="chip"><em>1浪擴展1.786</em><b>2,840</b></span>
+            <span class="chip"><em>空方缺口上緣</em><b>2,750</b></span>
+            <span class="chip"><em>近5年觸及量密集</em><b>36K</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>說明</h4>
+          <ul>
+            <li>4/15 + 4/16 <b>雙日收盤 2,820</b> 形成連續雙頂</li>
+            <li>4/16→4/17 向下跳空缺口 2,690–2,750（未回補前為壓力）</li>
+            <li>近 10 年觸及量 140K，歷史多次壓力測試</li>
+            <li>突破需帶量，站穩 2,850 才算有效</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">5 方法匯聚 + 厚量 → <b>★★★★</b>。反彈重回此區需連續帶量站穩 2,850 才算突破；否則容易成為第三次頂部形成三重頂風險。</div>
+    </div>
+  </div>
+
+  <!-- ⑤ 2,660–2,720 ★★★★ 關鍵壓力 -->
+  <div class="zone" data-c="5">
+    <div class="z-left">
+      <div class="price m">2,660 – 2,720</div>
+      <div class="name">關鍵反壓（1/5 高）</div>
+      <div class="stars"><span class="on">★★★★</span><span class="off">☆</span></div>
+      <div class="meta">
+        <span class="badge">決戰點</span>
+        <span class="dist m">距現價 <b>+7.0% ~ +9.5%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:65%"></div></div>
+        <span class="vol-label">140K 厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（5 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>2026/1/5 高</em><b>2,660</b></span>
+            <span class="chip"><em>Fib 0.382(2,135→2,930)</em><b>2,626</b></span>
+            <span class="chip"><em>Fib 0.236(2,020→2,930)</em><b>2,715</b></span>
+            <span class="chip"><em>多方缺口上緣2</em><b>2,670–2,750</b></span>
+            <span class="chip"><em>1浪擴展1.272</em><b>2,637</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能解讀</h4>
+          <ul>
+            <li>近 10 年觸及量 <b>140K</b>（厚）</li>
+            <li>2026/1 擴散平台 b 浪頂 2,660 的<b>反彈黃金切割</b></li>
+            <li>4/14→4/15 第二道多方跳空缺口上緣</li>
+            <li>站穩此區 = 擊退 B 浪反彈說，結構翻轉確認</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">5 方法匯聚，<b>短中線最關鍵壓力</b>。4/14–4/15 爆量強攻此區後遇壓拉回，重回需帶量。一旦站穩 2,660，空方缺口 + 雙頂 + 絕對高將陸續挑戰。</div>
+    </div>
+  </div>
+
+  <!-- ④ 2,530–2,610 ★★★ 第一壓力 -->
+  <div class="zone" data-c="4">
+    <div class="z-left">
+      <div class="price m">2,530 – 2,610</div>
+      <div class="name">第一壓力區</div>
+      <div class="stars"><span class="on">★★★</span><span class="off">☆☆</span></div>
+      <div class="meta">
+        <span class="badge">近壓</span>
+        <span class="dist m">距現價 <b>+1.8% ~ +5.0%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:93%"></div></div>
+        <span class="vol-label">199K 極厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（6 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>2025/10/7 高</em><b>2,530</b></span>
+            <span class="chip"><em>2026/2/26 高</em><b>2,535</b></span>
+            <span class="chip"><em>Fib 0.5(2,135→2,930)</em><b>2,532</b></span>
+            <span class="chip"><em>大 Fib 0.5(1,790→3,230)</em><b>2,510</b></span>
+            <span class="chip"><em>1浪=1.0擴展</em><b>2,530</b></span>
+            <span class="chip"><em>4/17 反彈高</em><b>2,605</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能解讀</h4>
+          <ul>
+            <li>近 10 年觸及量 <b>199K（次厚）</b></li>
+            <li>多個波段高點疊合 = <b>三重頂結構</b></li>
+            <li>1浪=下跌1.0等幅（2,135 + 395）= 2,530 精確</li>
+            <li>此區為反彈 A 浪的第一滿足位</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">6 方法 + 極厚量 → <b>★★★</b>（只給三星因為距離現價太近，是待驗證的近壓）。若帶量站穩 2,610 以上 → 指向 2,660 決戰；若反彈遇壓下殺 → 測試 2,420 支撐。</div>
+    </div>
+  </div>
+
+  <!-- 現價 -->
+  <div class="now-row m">
+    <span class="arrow">▸</span>
+    <span class="label">現價</span>
+    <span class="val">2,485</span>
+    <span class="note">收盤 2026/04/23 ｜ 盤中低 2,440（Fib 0.618 精確觸及）</span>
+  </div>
+
+  <!-- ③ 2,420–2,495 ★★★★★ 第一強支撐 -->
+  <div class="zone" data-c="3">
+    <div class="z-left">
+      <div class="price m">2,420 – 2,495</div>
+      <div class="name">第一強力支撐（測試中）⭐</div>
+      <div class="stars"><span class="on">★★★★★</span></div>
+      <div class="meta">
+        <span class="badge">測試中</span>
+        <span class="dist m">距現價 <b>-2.6% ~ +0.4%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:93%"></div></div>
+        <span class="vol-label">200K 極厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（7 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>Fib 0.618(2,135→2,930)</em><b>2,439</b></span>
+            <span class="chip"><em>Fib 0.5(2,020→2,930)</em><b>2,475</b></span>
+            <span class="chip"><em>大 Fib 0.382(1,590→2,930)</em><b>2,418</b></span>
+            <span class="chip"><em>多方缺口下緣</em><b>2,485</b></span>
+            <span class="chip"><em>4/13 K 棒高</em><b>2,485</b></span>
+            <span class="chip"><em>還原MA240</em><b>2,266</b></span>
+            <span class="chip"><em>4/23 盤中低</em><b>2,440</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能解讀（三維度）</h4>
+          <ul>
+            <li><b>技術</b>：7 方法匯聚於 75 點區間（3% 寬度）</li>
+            <li><b>成交量</b>：近 10 年觸及量 <b>200K（極厚）</b></li>
+            <li><b>缺口</b>：多方跳空缺口 2,485–2,540 下緣，守住缺口不補</li>
+            <li><b>實測</b>：4/23 盤中低 2,440 精確觸及 Fib 0.618</li>
+            <li><b>籌碼</b>：外資剛在此區建倉，借券空頭回補中</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">7 方法 × 極厚量 × 實測守住 → <b>★★★★★</b>。<b>反彈段健康回測的第一道防線</b>，符合強勢多頭常見的 Fib 0.618 拉回特徵。若今日收盤跌破 2,420 且不能立即收復 → 需退守第二支撐 2,300–2,395。</div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="g-range m">2,395 – 2,420</div>
+    <div class="g-desc"><strong>過渡帶</strong>｜MA20（<strong>2,406</strong>）支撐 + MA60（<strong>2,387</strong>）緊鄰。若跌破將快速滑向第二主支撐。3/17–3/18 區間套牢浮碼。</div>
+  </div>
+
+  <!-- ② 2,300–2,395 ★★★★★ 第二主支撐 -->
+  <div class="zone" data-c="2">
+    <div class="z-left">
+      <div class="price m">2,300 – 2,395</div>
+      <div class="name">第二主支撐（均線糾結）⭐</div>
+      <div class="stars"><span class="on">★★★★★</span></div>
+      <div class="meta">
+        <span class="badge">最厚量</span>
+        <span class="dist m">距現價 <b>-7.4% ~ -3.6%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:100%"></div></div>
+        <span class="vol-label">214K 最厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（8 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>MA60</em><b>2,387</b></span>
+            <span class="chip"><em>MA240 原始</em><b>2,318</b></span>
+            <span class="chip"><em>MA120</em><b>2,315</b></span>
+            <span class="chip"><em>Fib 0.382(1,790→2,930)</em><b>2,340</b></span>
+            <span class="chip"><em>Fib 0.618(2,020→2,930)</em><b>2,368</b></span>
+            <span class="chip"><em>Fib 0.786(2,135→2,930)</em><b>2,305</b></span>
+            <span class="chip"><em>大 Fib 0.5(1,590→2,930)</em><b>2,260</b></span>
+            <span class="chip"><em>TL2/TL3 趨勢線</em><b>2,300</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能解讀（全表最強）</h4>
+          <ul>
+            <li><b>技術</b>：8 方法在 95 點區間內匯聚（全表最密集）</li>
+            <li><b>成交量</b>：近 10 年觸及量 <b>214K（全表最厚）</b></li>
+            <li><b>均線</b>：MA20/60/120/240 全部在此糾結，<b>糾結後發散</b>常帶出趨勢</li>
+            <li><b>趨勢線</b>：2025/4→2026/4 上升線 + 2022→2026 長期線交會</li>
+            <li><b>缺口</b>：4/13 跳空 2,325–2,310 幾乎已補（強勢）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">8 方法 × 全表最厚量 × 四均線糾結 → <b>★★★★★</b>。<b>若反彈段回測深度擴大，此處為主要承接區</b>。若此區失守（週 K 收盤），代表 4/15 反彈為 B 浪反彈而非真反轉，應提高警覺。</div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="g-range m">2,280 – 2,300</div>
+    <div class="g-desc"><strong>過渡區</strong>｜4/8–4/9 多方反彈起點（<strong>2,280</strong>）+ 2025/10/15 低（<strong>2,195</strong>）之間。本區為主支撐到第三支撐的緩衝。</div>
+  </div>
+
+  <!-- ① 2,200–2,280 ★★★ 第三支撐 -->
+  <div class="zone" data-c="6">
+    <div class="z-left">
+      <div class="price m">2,200 – 2,280</div>
+      <div class="name">第三支撐（中級黃金切割）</div>
+      <div class="stars"><span class="on">★★★</span><span class="off">☆☆</span></div>
+      <div class="meta">
+        <span class="badge">次支撐</span>
+        <span class="dist m">距現價 <b>-11.5% ~ -8.2%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:82%"></div></div>
+        <span class="vol-label">175K 厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（5 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>Fib 0.618(1,790→2,930)</em><b>2,225</b></span>
+            <span class="chip"><em>Fib 0.786(2,020→2,930)</em><b>2,215</b></span>
+            <span class="chip"><em>若B頂，C=1.272a</em><b>2,262</b></span>
+            <span class="chip"><em>2025/10/15 低</em><b>2,195</b></span>
+            <span class="chip"><em>TL2(2025→2026) 線性</em><b>2,160</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能解讀</h4>
+          <ul>
+            <li>近 10 年觸及量 175K（厚）</li>
+            <li>2025 / 10 以來盤整區低點密集</li>
+            <li>若 2,930 是 B 浪頂，C 浪 1.272 倍幅目標約在此</li>
+            <li>週 K MA20（<b>約 2,352</b>）下方緩衝區</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">5 方法匯聚 → <b>★★★</b>。<b>B 浪反彈情境的主要滿足位</b>。若測到此區仍有止跌（長下影 + 放量），代表修正型態是 5–3–5 鋸齒，而非深度修正。</div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="g-range m">2,170 – 2,200</div>
+    <div class="g-desc"><strong>過渡區</strong>｜4/7 反彈起漲點 <strong>2,170</strong>。此區再破代表 2,135 波段低可能被挑戰，多頭結構嚴重警訊。</div>
+  </div>
+
+  <!-- 波段主底 2,100–2,170 ★★★★ -->
+  <div class="zone" data-c="1">
+    <div class="z-left">
+      <div class="price m">2,100 – 2,170</div>
+      <div class="name">波段主底 / 整段反彈起點</div>
+      <div class="stars"><span class="on">★★★★</span><span class="off">☆</span></div>
+      <div class="meta">
+        <span class="badge">關鍵底</span>
+        <span class="dist m">距現價 <b>-15.5% ~ -12.7%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:58%"></div></div>
+        <span class="vol-label">123K 中厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（6 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>2026/4/2 波段低</em><b>2,135</b></span>
+            <span class="chip"><em>大 Fib 0.618(1,590→2,930)</em><b>2,102</b></span>
+            <span class="chip"><em>若B頂，C=1.618a</em><b>2,081</b></span>
+            <span class="chip"><em>TL3 長期上升線</em><b>2,146–2,176</b></span>
+            <span class="chip"><em>還原MA1200+381</em><b>2,104</b></span>
+            <span class="chip"><em>4/7 反彈起漲點</em><b>2,170</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>量能與籌碼</h4>
+          <ul>
+            <li>近 10 年觸及量 123K（中厚）</li>
+            <li>還原 MA1200 通過 <b>2,104</b>，長波段生命線</li>
+            <li>線性 + 對數上升趨勢線三點驗證</li>
+            <li>外資 4/8 起首次大買 529 張 → <b>建倉成本區</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">6 方法匯聚 + 已實測止跌 + 外資建倉成本 → <b>★★★★</b>。<b>整段反彈結構的生死線</b>，跌破 2,100 代表整個反彈結構瓦解，下看極端支撐。守穩則 V 型反轉主劇本不變。</div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="g-range m">2,050 – 2,100</div>
+    <div class="g-desc"><strong>極端過渡</strong>｜ <strong>Fib 0.886(2,135→2,930)= 2,226（這已是次級支撐在更下）</strong>｜4/2 盤中低 2,135 的完整下方破位區，若跌入代表 4 月 V 型反轉失敗。</div>
+  </div>
+
+  <!-- 極端支撐 1,950–2,050 ★★ -->
+  <div class="zone" data-c="1">
+    <div class="z-left">
+      <div class="price m">1,950 – 2,050</div>
+      <div class="name">極端支撐（2025/12 前低）</div>
+      <div class="stars"><span class="on">★★</span><span class="off">☆☆☆</span></div>
+      <div class="meta">
+        <span class="badge">低機率</span>
+        <span class="dist m">距現價 <b>-21.5% ~ -17.5%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:81%"></div></div>
+        <span class="vol-label">174K 厚</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（5 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>2025/12/16 低</em><b>2,020</b></span>
+            <span class="chip"><em>Fib 0.786(1,790→2,930)</em><b>2,034</b></span>
+            <span class="chip"><em>原報告預期帶</em><b>1,988–2,015</b></span>
+            <span class="chip"><em>還原 Fib 0.618(1,330→3,053)</em><b>1,988</b></span>
+            <span class="chip"><em>心理關卡</em><b>2,000</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>說明</h4>
+          <ul>
+            <li>近 10 年觸及量 174K（厚）</li>
+            <li>原 3/31 報告的第一匯聚帶預測</li>
+            <li>當前情境機率僅約 <b>10–15%</b></li>
+            <li>需出現系統性風險才會觸及</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">5 方法但<b>需 4 月 V 反失敗才會觸及</b> → <b>★★</b>。<b>非主線劇本</b>。若真跌到此，代表整個「2,135 真底」論述瓦解，需重新評估下跌結構是否延續。</div>
+    </div>
+  </div>
+
+  <!-- 終極硬底 1,850–1,910 ★ -->
+  <div class="zone" data-c="7">
+    <div class="z-left">
+      <div class="price m">1,850 – 1,910</div>
+      <div class="name">終極硬底（大趨勢線）</div>
+      <div class="stars"><span class="on">★</span><span class="off">☆☆☆☆</span></div>
+      <div class="meta">
+        <span class="badge">尾部風險</span>
+        <span class="dist m">距現價 <b>-25.6% ~ -23.1%</b></span>
+      </div>
+      <div class="vol-bar">
+        <div class="vol-track"><div class="vol-fill" style="width:50%"></div></div>
+        <span class="vol-label">106K 中</span>
+      </div>
+    </div>
+    <div class="z-right">
+      <div class="z-cols">
+        <div>
+          <h4>技術來源（4 方法）</h4>
+          <div class="chips">
+            <span class="chip"><em>TL1 線性(2022→2025)</em><b>1,875</b></span>
+            <span class="chip"><em>TL1 對數</em><b>1,903</b></span>
+            <span class="chip"><em>W5=0.618×W1</em><b>1,940</b></span>
+            <span class="chip"><em>大 Fib 0.786(1,590→3,230)</em><b>1,888</b></span>
+          </div>
+        </div>
+        <div>
+          <h4>說明</h4>
+          <ul>
+            <li>TL1（2022 低 → 2025 低）主趨勢線通過</li>
+            <li>原 3/31 報告終極匯聚帶</li>
+            <li>現況機率僅 <b>5% 以下</b></li>
+            <li>需產業重大利空 + 全球衰退三重打擊</li>
+          </ul>
+        </div>
+      </div>
+      <div class="verdict">純<b>黑天鵝情境</b> → <b>★</b>。以 2026E EPS 189 元算，對應 PE 10x，除非獲利大幅下修否則不合理。保留為尾部風險防範，非操作依據。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MA deduction -->
+<section class="scoring open" id="ma-info" style="margin-top:12px">
+  <button class="scoring-toggle" onclick="this.closest('.scoring').classList.toggle('open')">
+    <h3>均線扣抵與方向預判 · 4/23 基準</h3>
+    <span class="arr">▾</span>
+  </button>
+  <div class="scoring-body">
+    <div class="scoring-inner">
+      <table>
+        <tr><th>均線</th><th>現值</th><th>vs 現價</th><th>方向</th><th>未來扣抵路徑與判讀</th></tr>
+        <tr><td>MA20</td><td>2,406</td><td>+79</td><td>→ 走平偏上</td><td>1–10 天扣抵 2,155–2,280（低於現價）→ 短期上彎；但 15 天後扣抵 2,820（4/16 高）→ 若股價 5/14 不能站穩 2,820 以上，MA20 屆時會再度下彎</td></tr>
+        <tr><td>MA60</td><td>2,387</td><td>+98</td><td>↑ 上彎</td><td>1–20 天扣抵 2,370–2,435（接近現價）→ 走平偏上，需股價站穩 2,500 以上才能強勢上彎</td></tr>
+        <tr><td>MA120</td><td>2,315</td><td>+170</td><td>↑ 強力上彎</td><td>扣抵 2,070–2,255（全低於現價），持續上彎至少 1 個月，為多頭結構核心支撐</td></tr>
+        <tr><td>MA240</td><td>2,318</td><td>+167</td><td>↑ 持續上彎</td><td>60 天扣抵 2,100–2,365（全低於現價）→ <b>年線上彎確定至 6 月底</b>，結構性多頭由負翻正</td></tr>
+        <tr><td>還原 MA1200</td><td>2,104</td><td>+381</td><td>↑ 強上彎</td><td>扣抵 2,324 以上（低於現價 2,485），持續上彎。當前股價已在 MA1200 上方 +18%，大週期多頭確立</td></tr>
+        <tr><td>還原 MA2400</td><td>2,658</td><td>−173</td><td>→ 走平</td><td>目前股價仍在 MA2400 下方，代表「超長週期均線」尚未翻多。需突破 2,660 且站穩才能改寫 10 年大趨勢</td></tr>
+      </table>
+      <p style="margin:8px 0 0;font-size:11px;color:var(--ink-3)">
+        <b>關鍵觀察</b>：MA20/60/120/240 四條均線現值集中在 <b>2,315–2,406</b> 約 90 點糾結區，糾結後發散通常帶出明確趨勢。現價 2,485 已站上全部 4 條均線 → 短線多頭排列雛形成立。<br>
+        <b>反彈結構確認條件</b>：
+        （1）不跌破 2,420（Fib 0.618 + 多方缺口下緣）；
+        （2）週 K 收盤守穩 2,300–2,395 主支撐帶；
+        （3）突破 2,660 決戰點 → 新一輪上漲啟動；
+        （4）突破 2,930 → 大 B 反轉確認，目標 3,150–3,230。<br>
+        <b>反彈失敗訊號</b>：跌破 2,300 主支撐帶 + 週 K 放量 → 回到 B 浪反彈情境，需警覺 C 浪重啟風險。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 情境機率研判 -->
+<section class="scoring open" id="scenarios" style="margin-top:12px">
+  <button class="scoring-toggle" onclick="this.closest('.scoring').classList.toggle('open')">
+    <h3>三情境機率研判（綜合技術 × 籌碼 × 基本面）</h3>
+    <span class="arr">▾</span>
+  </button>
+  <div class="scoring-body">
+    <div class="scoring-inner">
+      <table>
+        <tr><th style="width:90px">情境</th><th style="width:60px">機率</th><th>價格路徑</th><th>觸發條件</th></tr>
+        <tr>
+          <td style="color:var(--c5)">主劇本<br>（V 型反轉）</td>
+          <td><b>55%</b></td>
+          <td>2,485 → 回測 2,420–2,495 止跌 → 攻 2,530–2,610 → 突破 2,660 → 挑戰 2,930 → 大 B 頂 3,150–3,230</td>
+          <td>• 2,420 守住<br>• 外資持續買超<br>• 借券餘額持續回補<br>• 5/上法說無重大利空</td>
+        </tr>
+        <tr>
+          <td style="color:var(--c3)">次劇本<br>（B 浪反彈）</td>
+          <td><b>30%</b></td>
+          <td>2,485 → 跌破 2,420 → 深度回測 2,300–2,395 → 二次挑戰 2,660 失敗 → 下探 2,200–2,280 甚至 2,100–2,170</td>
+          <td>• 跌破 2,420 且無法當日收復<br>• 外資轉賣超<br>• 借券餘額重新增加<br>• 法說預期不佳或宏觀風險</td>
+        </tr>
+        <tr>
+          <td style="color:var(--c1)">極端劇本<br>（V 反失敗）</td>
+          <td><b>15%</b></td>
+          <td>2,485 → 跌破所有支撐 → 測試 2,100–2,170 或 1,950–2,050 → 極端情境到 TL1 1,875</td>
+          <td>• 跌破 2,100 波段主底<br>• 全球衰退 + 關稅惡化<br>• 基本面下修（EPS 砍 20%+）<br>• 系統性風險</td>
+        </tr>
+      </table>
+      <p style="margin:8px 0 0;font-size:11px;color:var(--ink-3)">
+        <b>機率判斷依據</b>：
+        （1）籌碼面：外資大買 + 借券回補 + 投信高點調節，屬標準轉多結構，給主劇本較高權重；
+        （2）技術面：V 型反轉 +37% 動能強 + 底背離成立 + 均線結構由負翻正，支持主劇本；
+        （3）基本面：2026E EPS 189 元共識強，PE 13x 估值偏低，但需法說會驗證；
+        （4）風險面：借券餘額雖回補但絕對水位仍歷史極高（6,669 張），若停止回補則軋空動能消失，是次劇本的主要觸發。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <b>3008 大立光 匯聚帶 v2</b>｜基準日 2026/04/23｜還原權值 + 原始日線 CSV + 借券賣出餘額 CSV 交叉驗證<br>
+  星級 = 技術方法數 × 成交量厚度 × 趨勢線匯流 × 籌碼面支持。量能條以 214K（2,300–2,395 主支撐，近 10 年觸及量最厚）為 100%。<br>
+  <b>主觀察</b>：2,420 Fib 0.618 是否守住 → 決定反彈段健康度；2,660 決戰點是否突破 → 決定情境是主劇本 V 反還是次劇本 B 浪。<br>
+  <b>均線環境</b>：MA240 / MA120 強勢上彎，MA60 / MA20 走平偏上，4 線糾結於 2,315–2,406 為歷史少見，糾結後發散即將表態。<br>
+  本報告僅供分析參考，不構成投資建議。投資有風險，決策請自行判斷。
+</footer>
+
+</div>
+</body>
+</html>
